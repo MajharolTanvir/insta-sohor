@@ -35,10 +35,15 @@ const switchTab = (id) => {
         document.getElementById("posts").style.display = "grid";
         document.getElementById("liked").style.display = "none";
         document.getElementById("reported").style.display = "none";
+        const removeReportData = document.getElementById('reported');
+        removeReportData.textContent = "";
+
     } else if (id === "liked") {
         document.getElementById("liked").style.display = "block";
         document.getElementById("posts").style.display = "none";
         document.getElementById("reported").style.display = "none";
+        const removeLikeData = document.getElementById('liked');
+        removeLikeData.textContent = "";
 
         displayLikedPosts();
     } else {
@@ -154,13 +159,13 @@ const displayReportedPosts = () => {
     reportedPosts.forEach((post) => {
         const div = createPost(post);
         document.getElementById("reported").appendChild(div);
-    });
-};
+      });
+    };
 
-const loadPosts = async() => {
-    let data = await fetch('../data/posts.json');
-    posts = await data.json();
-    showPosts(posts);
+async function loadPosts() {
+  let data = await fetch('../data/posts.json');
+  posts = await data.json();
+  showPosts(posts);
 }
 
 loadPosts();
